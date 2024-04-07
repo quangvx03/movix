@@ -14,8 +14,8 @@ function Movie({ movie }) {
                     />
                 </Link>
                 <div className="absolute flex-btn gap-2 bottom-0 right-0 left-0 bg-main bg-opacity-60 text-white px-4 py-3">
-                    <h3 className="font0-semibold truncate">{movie?.name}</h3>
-                    <button className="h-9 w-9 text-sm flex-colo transitions hover:bg-subMain border-2 border-subMain rounded-md text-white">
+                    <h3 className="font0-semibold truncate flex-grow">{movie?.name}</h3>
+                    <button className="h-9 w-9 text-sm flex-colo transitions hover:bg-subMain border-2 border-subMain rounded-md text-white flex-shrink-0">
                         <FaHeart />
                     </button>
                 </div>
