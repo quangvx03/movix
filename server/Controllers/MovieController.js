@@ -244,6 +244,72 @@ const deleteMovie = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc delete all movies
+// @route DELETE /api/movies
+// @access Private/Admin
+
+const deleteAllMovies = asyncHandler(async (req, res) => {
+  try {
+    // delete all movies
+    await Movie.deleteMany({});
+    res.json({ message: "Tất cả phim đã được xóa" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// @desc create movie
+// @route POST /api/movies
+// @access Private/Admin
+
+const createMovie = asyncHandler(async (req, res) => {
+  try {
+    // get data from request body
+    const {
+      name,
+      desc,
+      image,
+      titleImage,
+      rate,
+      numberOfReviews,
+      category,
+      time,
+      language,
+      year,
+      video,
+      casts,
+    } = req.body;
+
+    // create new movie
+    const movie = new Movie({
+      name,
+      desc,
+      image,
+      titleImage,
+      rate,
+      numberOfReviews,
+      category,
+      time,
+      language,
+      year,
+      video,
+      casts,
+      userId: req.user._id,
+    });
+
+    // save the new movie in DB
+    if (movie) {
+      const createdMovie = await movie.save();
+      res.status(201).json(createdMovie);
+    } else {
+      res.status(400);
+      throw new Error("Dữ liệu không hợp lệ");
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 export {
   importMovies,
   getMovies,
@@ -253,4 +319,6 @@ export {
   createMovieReview,
   updateMovie,
   deleteMovie,
+  deleteAllMovies,
+  createMovie,
 };

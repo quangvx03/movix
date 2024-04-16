@@ -20,6 +20,17 @@ function NavBar() {
               />
             </Link>
           </div>
+          <div className="col-span-2 font-medium text-sm hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-center items-center">
+            <NavLink to="/movies" className={Hover}>
+              Phim
+            </NavLink>
+            <NavLink to="/about-us" className={Hover}>
+              Giới thiệu
+            </NavLink>
+            <NavLink to="/contact-us" className={Hover}>
+              Liên hệ
+            </NavLink>
+          </div>
           {/* search Form */}
           <div className="col-span-3">
             <form className="w-full text-sm bg-dryGray rounded flex-btn gap-4">
@@ -37,16 +48,7 @@ function NavBar() {
             </form>
           </div>
           {/* menu */}
-          <div className="col-span-3 font-medium text-sm hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-end items-center">
-            <NavLink to="/movies" className={Hover}>
-              Phim
-            </NavLink>
-            <NavLink to="/about-us" className={Hover}>
-              Giới thiệu
-            </NavLink>
-            <NavLink to="/contact-us" className={Hover}>
-              Liên hệ
-            </NavLink>
+          <div className="col-span-1 font-medium text-sm hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-end items-center">
             {/* <NavLink to="/favorites" className={`${Hover} relative`}> */}
             <NavLink to="/favorites" className={Hover}>
               <FaHeart className="w-6 h-6" />
