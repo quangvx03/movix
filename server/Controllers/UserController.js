@@ -217,7 +217,7 @@ const addLikedMovie = asyncHandler(async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-}); // 1:20:00
+});
 
 // @desc Delete all liked movies
 // @route DELETE /api/users/favorites

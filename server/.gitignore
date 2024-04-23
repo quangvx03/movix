@@ -44,3 +44,9 @@ jspm_packages
 
 # Optional eslint cache
 .eslintcache
+
+# Jest
+/jest.config.js
+/jest.setup.js
+/__tests__
+/__mocks__
