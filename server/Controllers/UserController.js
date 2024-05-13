@@ -43,7 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
       throw new Error("Dữ liệu người dùng không hợp lệ");
     }
   } catch (error) {
-    res.status(400).json({ error: error.toString() });
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -67,7 +67,7 @@ const loginUser = asyncHandler(async (req, res) => {
       });
       // if user does not exist or password is incorrect send error message
     } else {
-      res.status(401);
+      res.status(400);
       throw new Error("Email hoặc mật khẩu không đúng");
     }
   } catch (error) {
