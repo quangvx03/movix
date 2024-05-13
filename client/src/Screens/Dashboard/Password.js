@@ -103,5 +103,3 @@ function Password() {
 }
 
 export default Password;
-
-// 5:28
