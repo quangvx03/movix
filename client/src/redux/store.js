@@ -8,6 +8,10 @@ const rootReducer = combineReducers({
   userUpdateProfile: User.userUpdateProfileReducer,
   userDeleteProfile: User.userDeleteProfileReducer,
   userChangePassword: User.userChangePasswordReducer,
+  userGetFavoriteMovies: User.userGetFavoriteMoviesReducer,
+  userDeleteFavoriteMovies: User.userDeleteFavoriteMoviesReducer,
+  adminGetAllUsers: User.adminGetAllUsersReducer,
+  adminDeleteUser: User.adminDeleteUserReducer,
 });
 
 // get userInfo from localStorage

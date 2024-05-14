@@ -86,6 +86,66 @@ const changePasswordAction = (passwords) => async (dispatch, getState) => {
   }
 };
 
+// get all favorite movies action
+const getFavoriteMoviesAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.GET_FAVORITE_MOVIES_REQUEST });
+    const response = await userApi.getFavoriteMoviesService(
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.GET_FAVORITE_MOVIES_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.GET_FAVORITE_MOVIES_FAIL);
+  }
+};
+
+// delete all favorite movies action
+const deleteFavoriteMoviesAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.DELETE_FAVORITE_MOVIES_REQUEST });
+    await userApi.deleteFavoriteMoviesService(tokenProtection(getState));
+    dispatch({
+      type: userConstants.DELETE_FAVORITE_MOVIES_SUCCESS,
+    });
+    toast.success("Tất cả phim yêu thích đã được xoá");
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.DELETE_FAVORITE_MOVIES_FAIL);
+  }
+};
+
+// admin get all users action
+const getAllUsersAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.GET_ALL_USERS_REQUEST });
+    const response = await userApi.getAllUsersService(
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.GET_ALL_USERS_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.GET_ALL_USERS_FAIL);
+  }
+};
+
+// admin delete user action
+const deleteUserAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.DELETE_USER_REQUEST });
+    await userApi.deleteUserService(id, tokenProtection(getState));
+    dispatch({
+      type: userConstants.DELETE_USER_SUCCESS,
+    });
+    toast.success("Người dùng đã được xoá");
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.DELETE_USER_FAIL);
+  }
+};
+
 export {
   loginAction,
   registerAction,
@@ -93,4 +153,8 @@ export {
   updateProfileAction,
   deleteProfileAction,
   changePasswordAction,
+  getFavoriteMoviesAction,
+  deleteFavoriteMoviesAction,
+  getAllUsersAction,
+  deleteUserAction,
 };
