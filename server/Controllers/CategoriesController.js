@@ -25,15 +25,22 @@ const getCategories = asyncHandler(async (req, res) => {
 
 const createCategory = asyncHandler(async (req, res) => {
   try {
-    // get title from request body
+    // Get title from request body
     const { title } = req.body;
-    // create new category
-    const category = new Categories({
-      title,
-    });
-    // save category to DB
+
+    // Check if the category already exists
+    const existingCategory = await Categories.findOne({ title });
+    if (existingCategory) {
+      return res.status(400).json({ message: "Thể loại đã tồn tại" });
+    }
+
+    // Create new category
+    const category = new Categories({ title });
+
+    // Save category to DB
     const createdCategory = await category.save();
-    // send created category to the client
+
+    // Send created category to the client
     res.status(201).json(createdCategory);
   } catch (error) {
     res.status(400).json({ message: error.message });

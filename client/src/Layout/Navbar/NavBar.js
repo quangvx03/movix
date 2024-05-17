@@ -1,13 +1,26 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaHeart, FaSearch } from "react-icons/fa";
 import { CgUser } from "react-icons/cg";
 import { useSelector } from "react-redux";
 
 function NavBar() {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.userLogin);
   const hover = "hover:text-subMain transitions text-white";
   const Hover = ({ isActive }) => (isActive ? "text-subMain" : hover);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      navigate(`/movies/${search}`);
+      setSearch(search);
+    } else {
+      navigate("/movies");
+    }
+  };
+
   return (
     <>
       <div className="bg-main shadow-md sticky top-0 z-20">
@@ -35,9 +48,14 @@ function NavBar() {
           </div>
           {/* search Form */}
           <div className="col-span-3">
-            <form className="w-full text-sm bg-dryGray rounded flex-btn gap-4">
+            <form
+              onSubmit={handleSearch}
+              className="w-full text-sm bg-dryGray rounded flex-btn"
+            >
               <input
-                type="text"
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Tìm kiếm..."
                 className="font-medium placeholder:text-border text-sm w-11/12 h-12 bg-transparent border-none px-5 text-black"
               />
@@ -51,33 +69,36 @@ function NavBar() {
           </div>
           {/* menu */}
           <div className="col-span-1 font-medium text-sm hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-end items-center">
-            {/* <NavLink to="/favorites" className={`${Hover} relative`}> */}
             <NavLink to="/favorites" className={Hover}>
               <FaHeart className="w-6 h-6" />
-              {/* <div className="w-5 h-5 flex-colo rounded-full text-xs bg-subMain text-white absolute -top-5 -right-1">
-                7
-              </div> */}
             </NavLink>
-            <NavLink
-              to={
-                userInfo?.isAdmin
-                  ? "/dashboard"
-                  : userInfo
-                  ? "/profile"
-                  : "/login"
-              }
-              className={Hover}
-            >
-              {userInfo ? (
-                <img
-                  src={userInfo?.image ? userInfo?.image : "/images/user.png"}
-                  alt={userInfo?.name}
-                  className="w-8 h-8 rounded-full border object-cover border-white"
-                />
-              ) : (
-                <CgUser className="w-8 h-8" />
+            <div className="relative group">
+              <NavLink
+                to={
+                  userInfo?.isAdmin
+                    ? "/dashboard"
+                    : userInfo
+                    ? "/profile"
+                    : "/login"
+                }
+                className={Hover}
+              >
+                {userInfo ? (
+                  <img
+                    src={userInfo?.image ? userInfo?.image : "/images/user.png"}
+                    alt={userInfo?.name}
+                    className="w-8 h-8 rounded-full border object-cover border-white"
+                  />
+                ) : (
+                  <CgUser className="w-8 h-8" />
+                )}
+              </NavLink>
+              {userInfo && (
+                <div className="absolute bottom-0 transform translate-y-full left-1/3 -translate-x-1/2 bg-subMain text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transitions">
+                  {userInfo?.name}
+                </div>
               )}
-            </NavLink>
+            </div>
           </div>
         </div>
       </div>

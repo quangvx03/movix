@@ -26,13 +26,13 @@ const Rows = ({ data, users, onEditFunction, onDeleteFunction }) => {
           <td className={`${Text}`}>
             {data?._id ? shortUppercaseId(data?._id) : "A12345"}
           </td>
-          <td className={`${Text}`}>{DateFormat(data?.createdAt)}</td>
           <td className={`${Text}`}>{data?.name}</td>
           <td className={`${Text}`}>{data?.email}</td>
           <td className={`${Text}`}>
             {data?.isAdmin ? "Quản trị viên" : "Người dùng"}
           </td>
-          <td className={`${Text} float-right flex-rows gap-2`}>
+          <td className={`${Text}`}>{DateFormat(data?.createdAt)}</td>
+          <td className={`${Text} pt-6 float-right flex-rows gap-2`}>
             {!data?.isAdmin && (
               <button
                 onClick={() => onDeleteFunction(data?._id)}
@@ -46,19 +46,22 @@ const Rows = ({ data, users, onEditFunction, onDeleteFunction }) => {
       ) : (
         //  Categories
         <>
-          <td className={`${Text} font-bold`}>A12345</td>
-          <td className={`${Text}`}>
-            {data.createAt ? data.createAt : "01/01/2024"}
+          <td className={`${Text} font-bold`}>
+            {data?._id ? shortUppercaseId(data?._id) : "A12345"}
           </td>
           <td className={`${Text}`}>{data.title}</td>
+          <td className={`${Text}`}>{DateFormat(data?.createdAt)}</td>
           <td className={`${Text} float-right flex-rows gap-2`}>
             <button
               onClick={() => onEditFunction(data)}
-              className="border border-border bg-dry flex-rows gap-2 text-border rounded py-1 px-2"
+              className="bg-green-600 text-white rounded flex-colo w-6 h-6"
             >
-              Chỉnh sửa <FaEdit className="text-green-500" />
+              <FaEdit />
             </button>
-            <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
+            <button
+              onClick={() => onDeleteFunction(data?._id)}
+              className="bg-subMain text-white rounded flex-colo w-6 h-6"
+            >
               <MdDelete />
             </button>
           </td>
@@ -84,9 +87,6 @@ function Table2({ data, users, onEditFunction, onDeleteFunction }) {
                   Mã ID
                 </th>
                 <th scope="col" className={`${Head}`}>
-                  Ngày tạo
-                </th>
-                <th scope="col" className={`${Head}`}>
                   Họ và tên
                 </th>
                 <th scope="col" className={`${Head}`}>
@@ -95,6 +95,9 @@ function Table2({ data, users, onEditFunction, onDeleteFunction }) {
                 <th scope="col" className={`${Head}`}>
                   Vai trò
                 </th>
+                <th scope="col" className={`${Head}`}>
+                  Ngày tạo
+                </th>
               </>
             ) : (
               <>
@@ -102,10 +105,10 @@ function Table2({ data, users, onEditFunction, onDeleteFunction }) {
                   Mã ID
                 </th>
                 <th scope="col" className={`${Head}`}>
-                  Ngày
+                  Tiêu đề
                 </th>
                 <th scope="col" className={`${Head}`}>
-                  Tiêu đề
+                  Ngày tạo
                 </th>
               </>
             )}

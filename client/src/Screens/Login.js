@@ -38,7 +38,7 @@ function Login() {
     if (userInfo?.isAdmin) {
       navigate("/dashboard");
     } else if (userInfo) {
-      navigate("/profile");
+      navigate("/");
     }
     if (isSuccess) {
       toast.success(`Chào mừng quay trở lại ${userInfo.name}`);

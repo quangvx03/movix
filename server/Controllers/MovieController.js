@@ -32,14 +32,20 @@ const getMovies = asyncHandler(async (req, res) => {
       ...(search && { name: { $regex: search, $options: "i" } }),
     };
 
+    // Kiểm tra nếu rate không rỗng thì thêm điều kiện lọc theo khoảng rate.
+    if (rate) {
+      const rateValue = parseFloat(rate);
+      query.rate = { $gte: rateValue, $lte: rateValue + 1 };
+    }
+
     // load more movies functionality
     const page = Number(req.query.pageNumber) || 1; // if pageNumber is not provided in query set it to 1
-    const limit = 2; // 2 movies per page
+    const limit = 12; // 2 movies per page
     const skip = (page - 1) * limit; // skip 2 movies per page
 
     // find movies by query, skip and limit
     const movies = await Movie.find(query)
-      .sort({ createdAt: -1 })
+      // .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
 
@@ -87,7 +93,9 @@ const getMovieById = asyncHandler(async (req, res) => {
 const getTopRatedMovies = asyncHandler(async (req, res) => {
   try {
     // find top rated movies
-    const movies = await Movie.find({}).sort({ rate: -1 });
+    const movies = await Movie.find({ rate: { $gte: 4.5, $lte: 5 } }).sort({
+      rate: -1,
+    });
     // send top rated movies to the client
     res.json(movies);
   } catch (error) {
@@ -102,7 +110,7 @@ const getTopRatedMovies = asyncHandler(async (req, res) => {
 const getRandomMovies = asyncHandler(async (req, res) => {
   try {
     // find random movies
-    const movies = await Movie.aggregate([{ $sample: { size: 8 } }]);
+    const movies = await Movie.aggregate([{ $sample: { size: 12 } }]);
     // send random movies to the client
     res.json(movies);
   } catch (error) {

@@ -1,11 +1,11 @@
 import express from "express";
 import {
-  addLikedMovie,
+  addFavoritedMovie,
   changeUserPassword,
-  deleteLikedMovies,
+  deleteFavoritedMovies,
   deleteUser,
   deleteUserProfile,
-  getLikedMovies,
+  getFavoritedMovies,
   getUsers,
   loginUser,
   registerUser,
@@ -23,9 +23,9 @@ router.post("/login", loginUser);
 router.put("/", protect, updateUserProfile);
 router.delete("/", protect, deleteUserProfile);
 router.put("/password", protect, changeUserPassword);
-router.get("/favorites", protect, getLikedMovies);
-router.post("/favorites", protect, addLikedMovie);
-router.delete("/favorites", protect, deleteLikedMovies);
+router.get("/favorites", protect, getFavoritedMovies);
+router.post("/favorites", protect, addFavoritedMovie);
+router.delete("/favorites", protect, deleteFavoritedMovies);
 
 // ADMIN ROUTES
 router.get("/", protect, admin, getUsers);

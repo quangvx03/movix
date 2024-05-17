@@ -146,6 +146,25 @@ const deleteUserAction = (id) => async (dispatch, getState) => {
   }
 };
 
+// user favorite movie action
+const favoriteMovieAction = (movieId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.FAVORITE_MOVIE_REQUEST });
+    const response = await userApi.favoriteMovieService(
+      movieId,
+      tokenProtection(getState)
+    );
+    dispatch({
+      type: userConstants.FAVORITE_MOVIE_SUCCESS,
+      payload: response,
+    });
+    toast.success("Phim đã được thêm vào danh sách yêu thích");
+    dispatch(getFavoriteMoviesAction());
+  } catch (error) {
+    ErrorsAction(error, dispatch, userConstants.FAVORITE_MOVIE_FAIL);
+  }
+};
+
 export {
   loginAction,
   registerAction,
@@ -157,4 +176,5 @@ export {
   deleteFavoriteMoviesAction,
   getAllUsersAction,
   deleteUserAction,
+  favoriteMovieAction,
 };

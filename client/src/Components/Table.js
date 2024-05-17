@@ -10,7 +10,7 @@ const Head =
 const Text = "text-sm text-center leading-6 whitespace-nowrap px-5 py-3";
 
 // rows
-const Rows = (movie, i, admin) => {
+const Rows = (movie, i, admin, onDeleteHandler) => {
   return (
     <tr key={i}>
       <td className={`${Text}`}>
@@ -26,25 +26,31 @@ const Rows = (movie, i, admin) => {
       <td className={`${Text}`}>{movie.category}</td>
       <td className={`${Text}`}>{movie.language}</td>
       <td className={`${Text}`}>{movie.year}</td>
-      <td className={`${Text}`}>{movie.time}</td>
-      <td className={`${Text} float-right flex-rows gap-2`}>
+      <td className={`${Text}`}>{movie.time} phút</td>
+      <td className={`${Text} pt-6 float-right flex-rows gap-2`}>
         {admin ? (
           <>
-            <button className="border border-border bg-dry flex-rows gap-2 text-border rounded py-1 px-2">
-              Chỉnh sửa <FaEdit className="text-green-500" />
+            <button className="bg-green-600 text-white rounded flex-colo w-6 h-6">
+              <FaEdit />
             </button>
-            <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
+            <button
+              onClick={() => onDeleteHandler(movie?._id)}
+              className="bg-subMain text-white rounded flex-colo w-6 h-6"
+            >
               <MdDelete />
             </button>
           </>
         ) : (
           <>
-            <button className="border border-border bg-dry flex-rows gap-2 text-border rounded py-1 px-2">
-              Tải xuống <FiDownload className="text-green-500" />
+            <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
+              <MdDelete />
+            </button>
+            <button className="bg-blue-600 text-white rounded flex-colo w-6 h-6">
+              <FiDownload />
             </button>
             <Link
               to={`/movie/${movie?._id}`}
-              className="bg-subMain text-white rounded flex-colo w-6 h-6"
+              className="bg-green-600 text-white rounded flex-colo w-6 h-6"
             >
               <GoEye />
             </Link>
@@ -56,7 +62,7 @@ const Rows = (movie, i, admin) => {
 };
 
 // table
-function Table({ data, admin }) {
+function Table({ data, admin, onDeleteHandler }) {
   return (
     <div className="overflow-x-scroll overflow-hidden relative w-full">
       <table className="w-full table-auto border border-border divide-y divide-border">
@@ -86,7 +92,7 @@ function Table({ data, admin }) {
           </tr>
         </thead>
         <tbody className="bg-main divide-y divide-gray-800">
-          {data.map((movie, i) => Rows(movie, i, admin))}
+          {data.map((movie, i) => Rows(movie, i, admin, onDeleteHandler))}
         </tbody>
       </table>
     </div>

@@ -13,7 +13,7 @@ import { Empty } from "../../Components/Notification/Empty";
 function FavoritesMovies() {
   const dispatch = useDispatch();
 
-  const { isLoading, isError, likedMovies } = useSelector(
+  const { isLoading, isError, favoritedMovies } = useSelector(
     (state) => state.userGetFavoriteMovies
   );
   // delete
@@ -47,9 +47,9 @@ function FavoritesMovies() {
       <div className="flex flex-col gap-6">
         <div className="flex-btn gap-2">
           <h2 className="text-xl font-bold">
-            Phim yêu thích: {likedMovies?.length}
+            Phim yêu thích: {favoritedMovies?.length}
           </h2>
-          {likedMovies?.length > 0 && (
+          {favoritedMovies?.length > 0 && (
             <button
               disabled={deleteLoading}
               onClick={deleteMoviesHandler}
@@ -61,8 +61,8 @@ function FavoritesMovies() {
         </div>
         {isLoading ? (
           <Loader />
-        ) : likedMovies.length > 0 ? (
-          <Table data={likedMovies} admin={false} />
+        ) : favoritedMovies.length > 0 ? (
+          <Table data={favoritedMovies} admin={false} />
         ) : (
           <Empty message="Chưa có phim nào được thêm vào yêu thích" />
         )}

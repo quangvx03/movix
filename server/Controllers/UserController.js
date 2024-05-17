@@ -167,16 +167,16 @@ const changeUserPassword = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Get all liked movies
+// @desc Get all favorited movies
 // @route GET /api/users/favorites
 // @access Private
-const getLikedMovies = asyncHandler(async (req, res) => {
+const getFavoritedMovies = asyncHandler(async (req, res) => {
   try {
     // find user in DB
-    const user = await User.findById(req.user._id).populate("likedMovies");
-    // if user exists send liked movies to client
+    const user = await User.findById(req.user._id).populate("favoritedMovies");
+    // if user exists send favorited movies to client
     if (user) {
-      res.json(user.likedMovies);
+      res.json(user.favoritedMovies);
     }
     // else send error message
     else {
@@ -188,26 +188,26 @@ const getLikedMovies = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Add movie to liked movies
+// @desc Add movie to favorited movies
 // @route PUT /api/users/favorites
 // @access Private
-const addLikedMovie = asyncHandler(async (req, res) => {
+const addFavoritedMovie = asyncHandler(async (req, res) => {
   const { movieId } = req.body;
   try {
     // find user in DB
     const user = await User.findById(req.user._id);
-    // if user exists add movie to liked movies and save it in DB
+    // if user exists add movie to favorited movies and save it in DB
     if (user) {
-      // check if movie already liked
-      // if movie already liked send error message
-      if (user.likedMovies.includes(movieId)) {
+      // check if movie already favorited
+      // if movie already favorited send error message
+      if (user.favoritedMovies.includes(movieId)) {
         res.status(400);
         throw new Error("Phim đã được thích");
       }
-      // else add movie to liked movies and save it in DB
-      user.likedMovies.push(movieId);
+      // else add movie to favorited movies and save it in DB
+      user.favoritedMovies.push(movieId);
       await user.save();
-      res.json(user.likedMovies);
+      res.json(user.favoritedMovies);
     }
     // else send error message
     else {
@@ -219,16 +219,16 @@ const addLikedMovie = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Delete all liked movies
+// @desc Delete all favorited movies
 // @route DELETE /api/users/favorites
 // @access Private
-const deleteLikedMovies = asyncHandler(async (req, res) => {
+const deleteFavoritedMovies = asyncHandler(async (req, res) => {
   try {
     // find user in DB
     const user = await User.findById(req.user._id);
-    // if user exists delete all liked movies and save it in DB
+    // if user exists delete all favorited movies and save it in DB
     if (user) {
-      user.likedMovies = [];
+      user.favoritedMovies = [];
       await user.save();
       res.json({ message: "Tất cả phim đã được xóa khỏi danh sách yêu thích" });
     }
@@ -291,9 +291,9 @@ export {
   updateUserProfile,
   deleteUserProfile,
   changeUserPassword,
-  getLikedMovies,
-  addLikedMovie,
-  deleteLikedMovies,
+  getFavoritedMovies,
+  addFavoritedMovie,
+  deleteFavoritedMovies,
   getUsers,
   deleteUser,
 };

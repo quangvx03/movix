@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutUs from "./Screens/AboutUs";
 import NotFound from "./Screens/NotFound";
@@ -21,9 +21,36 @@ import AddMovie from "./Screens/Dashboard/Admin/AddMovie";
 import ScrollOnTop from "./ScrollOnTop";
 import ToastContainer from "./Components/Notification/ToastContainer";
 import { AdminProtectedRouter, ProtectedRouter } from "./ProtectedRouter";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategoriesAction } from "./Redux/Actions/categoriesActions";
+import { getAllMoviesAction } from "./Redux/Actions/moviesActions";
+import { getFavoriteMoviesAction } from "./Redux/Actions/userActions";
+import toast from "react-hot-toast";
 
 function App() {
   Aos.init();
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const { isError, isSuccess } = useSelector(
+    (state) => state.userFavoriteMovie
+  );
+  const { isError: catError } = useSelector((state) => state.categoryGetAll);
+
+  useEffect(() => {
+    dispatch(getAllCategoriesAction());
+    dispatch(getAllMoviesAction({}));
+    if (userInfo) {
+      dispatch(getFavoriteMoviesAction());
+    }
+    if (isError || catError) {
+      toast.error(isError || catError);
+      dispatch({ type: "FAVORITE_MOVIE_RESET" });
+    }
+    if (isSuccess) {
+      dispatch({ type: "FAVORITE_MOVIE_RESET" });
+    }
+  }, [dispatch, userInfo, isError, catError, isSuccess]);
+
   return (
     <>
       <ToastContainer />
@@ -34,6 +61,7 @@ function App() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:search" element={<MoviesPage />} />
           <Route path="/movie/:id" element={<SingleMovie />} />
           <Route path="/watch/:id" element={<WatchPage />} />
           <Route path="/login" element={<Login />} />

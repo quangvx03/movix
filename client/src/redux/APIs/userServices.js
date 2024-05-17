@@ -1,5 +1,7 @@
 import Axios from "./Axios";
 
+// PUBLIC APIs
+
 // register new user API call
 const registerService = async (user) => {
   const { data } = await Axios.post("/users", user);
@@ -23,6 +25,8 @@ const loginService = async (user) => {
   }
   return data;
 };
+
+// PRIVATE APIs
 
 // update profile API call
 const updateProfileService = async (user, token) => {
@@ -80,6 +84,18 @@ const deleteFavoriteMoviesService = async (token) => {
   return data;
 };
 
+// favorite movie API call
+const favoriteMovieService = async (movieId, token) => {
+  const { data } = await Axios.post(`/users/favorites`, movieId, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
+// ADMIN APIs
+
 // admin get all users
 const getAllUsersService = async (token) => {
   const { data } = await Axios.get("/users", {
@@ -111,4 +127,5 @@ export {
   deleteFavoriteMoviesService,
   getAllUsersService,
   deleteUserService,
+  favoriteMovieService,
 };
