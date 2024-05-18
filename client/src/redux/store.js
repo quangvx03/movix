@@ -30,6 +30,9 @@ const rootReducer = combineReducers({
   createReview: Movie.createReviewReducer,
   movieDelete: Movie.deleteMovieReducer,
   movieDeleteAll: Movie.deleteAllMoviesReducer,
+  movieCreate: Movie.createMovieReducer,
+  casts: Movie.castsReducer,
+  movieUpdate: Movie.updateMovieReducer,
 });
 
 // get userInfo from localStorage

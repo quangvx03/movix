@@ -2,16 +2,13 @@ import React from "react";
 import FlexMovieItems from "./../FlexMovieItems";
 import { FaPlay, FaShareAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FiDownload } from "react-icons/fi";
 import Rating from "../Stars";
 
 function MovieInfo({ movie, setModalOpen }) {
   return (
     <div className="w-full xl:h-screen relative text-white">
       <img
-        src={
-          movie?.image ? `/images/movies/${movie?.image}` : "/images/user.png"
-        }
+        src={movie?.image ? movie?.image : "/images/user.png"}
         alt={movie?.name}
         className="w-full hidden xl:inline-block h-full object-cover"
       />
@@ -19,11 +16,7 @@ function MovieInfo({ movie, setModalOpen }) {
         <div className="container px-3 mx-auto 2xl:px-32 xl:grid grid-cols-2 flex-colo py-10 lg:py-20 gap-8">
           <div className="xl:col-span-1 w-full xl:order-none order-last h-header bg-dry border border-gray-800 rounded-lg overflow-hidden">
             <img
-              src={
-                movie?.titleImage
-                  ? `/images/movies/${movie?.titleImage}`
-                  : "/images/user.png"
-              }
+              src={movie?.titleImage ? movie?.titleImage : "/images/user.png"}
               alt={movie?.name}
               className="w-full h-full object-cover"
             />
@@ -50,17 +43,14 @@ function MovieInfo({ movie, setModalOpen }) {
               </div>
               {/* des */}
               <p className="text-text text-sm leading-7">{movie?.desc}</p>
-              <div className="grid sm:grid-cols-6 grid-cols-4 gap-4 p-6 bg-main border border-gray-800 rounded-lg">
+              <div className="grid sm:grid-cols-5 grid-cols-4 gap-4 p-6 bg-main border border-gray-800 rounded-lg">
                 {/* share */}
-                <div className="col-span-2 flex-rows gap-5 border-r border-border">
+                <div className="col-span-1 flex-rows gap-5 border-r border-border">
                   <button
                     onClick={() => setModalOpen(true)}
                     className="w-10 h-10 flex-colo rounded-lg bg-white bg-opacity-20"
                   >
                     <FaShareAlt />
-                  </button>
-                  <button className="w-10 h-10 flex-colo rounded-lg bg-subMain hover:text-dry transitions">
-                    <FiDownload />
                   </button>
                 </div>
                 {/* lang */}

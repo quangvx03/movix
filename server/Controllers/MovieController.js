@@ -185,6 +185,7 @@ const updateMovie = asyncHandler(async (req, res) => {
     const {
       name,
       desc,
+      director,
       image,
       titleImage,
       rate,
@@ -204,6 +205,7 @@ const updateMovie = asyncHandler(async (req, res) => {
       // update movie data
       movie.name = name || movie.name;
       movie.desc = desc || movie.desc;
+      movie.director = director || movie.director;
       movie.image = image || movie.image;
       movie.titleImage = titleImage || movie.titleImage;
       movie.rate = rate || movie.rate;
@@ -276,6 +278,7 @@ const createMovie = asyncHandler(async (req, res) => {
     const {
       name,
       desc,
+      director,
       image,
       titleImage,
       rate,
@@ -292,6 +295,7 @@ const createMovie = asyncHandler(async (req, res) => {
     const movie = new Movie({
       name,
       desc,
+      director,
       image,
       titleImage,
       rate,

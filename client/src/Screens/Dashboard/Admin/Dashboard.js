@@ -8,7 +8,10 @@ import { getAllUsersAction } from "../../../Redux/Actions/userActions";
 import toast from "react-hot-toast";
 import Loader from "../../../Components/Notification/Loader";
 import { Empty } from "../../../Components/Notification/Empty";
-import { deleteMovieAction } from "../../../Redux/Actions/moviesActions";
+import {
+  deleteMovieAction,
+  getAllMoviesAction,
+} from "../../../Redux/Actions/moviesActions";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -46,6 +49,8 @@ function Dashboard() {
   useEffect(() => {
     // get all user
     dispatch(getAllUsersAction());
+    // get all movies
+    dispatch(getAllMoviesAction({}));
     // errors
     if (isError || catError || userError || deleteError) {
       toast.error("Có lỗi xảy ra!");

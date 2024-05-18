@@ -3,7 +3,6 @@ import Layout from "./../Layout/Layout";
 import { Link, useParams } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { FaHeart, FaPlay } from "react-icons/fa";
-import { FiDownload } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieByIdAction } from "../Redux/Actions/moviesActions";
 import Loader from "../Components/Notification/Loader";
@@ -45,7 +44,7 @@ function WatchPage() {
               <BiArrowBack />
               {movie?.name}
             </Link>
-            <div className="flex-btn sm:w-auto w-full gap-5">
+            <div className="sm:w-auto w-full gap-5">
               <button
                 onClick={() => FavoriteMovie(movie, dispatch, userInfo)}
                 disabled={isFavorited(movie) || favoriteLoading}
@@ -54,9 +53,6 @@ function WatchPage() {
                  transitions bg-opacity-30 rounded px-4 py-3 text-sm`}
               >
                 <FaHeart />
-              </button>
-              <button className="bg-subMain flex-rows gap-2 hover:text-main transitions text-white rounded px-8 font-medium py-3 text-sm">
-                <FiDownload /> Tải xuống
               </button>
             </div>
           </div>
@@ -92,11 +88,7 @@ function WatchPage() {
                   </button>
                 </div>
                 <img
-                  src={
-                    movie?.image
-                      ? `/images/movies/${movie?.image}`
-                      : "images/user.png"
-                  }
+                  src={movie?.image ? movie?.image : "images/user.png"}
                   alt={movie?.name}
                   className="w-full h-full object-cover rounded-lg"
                 />

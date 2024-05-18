@@ -16,11 +16,7 @@ function Movie({ movie }) {
       <div className="border border-border p-1 hover:scale-105 transitions relative rounded overflow-hidden">
         <Link to={`/movie/${movie?._id}`} className="w-full">
           <img
-            src={
-              movie?.image
-                ? `/images/movies/${movie?.image}`
-                : "/images/user.png"
-            }
+            src={movie?.image ? movie?.image : "/images/user.png"}
             alt={movie?.name}
             className="w-full h-64 object-cover"
           />

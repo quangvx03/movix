@@ -1,9 +1,8 @@
 import React from "react";
-import { FaEdit } from "react-icons/fa";
+import { BiSolidEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { GoEye } from "react-icons/go";
-import { FiDownload } from "react-icons/fi";
 
 const Head =
   "text-xs text-center text-main font-semibold px-6 py-4 uppercase truncate";
@@ -30,9 +29,18 @@ const Rows = (movie, i, admin, onDeleteHandler) => {
       <td className={`${Text} pt-6 float-right flex-rows gap-2`}>
         {admin ? (
           <>
-            <button className="bg-green-600 text-white rounded flex-colo w-6 h-6">
-              <FaEdit />
-            </button>
+            <Link
+              to={`/movie/${movie?._id}`}
+              className="bg-blue-600 text-white rounded flex-colo w-6 h-6"
+            >
+              <GoEye />
+            </Link>
+            <Link
+              to={`/edit/${movie?._id}`}
+              className="bg-green-600 text-white rounded flex-colo w-6 h-6"
+            >
+              <BiSolidEdit />
+            </Link>
             <button
               onClick={() => onDeleteHandler(movie?._id)}
               className="bg-subMain text-white rounded flex-colo w-6 h-6"
@@ -42,18 +50,15 @@ const Rows = (movie, i, admin, onDeleteHandler) => {
           </>
         ) : (
           <>
-            <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
-              <MdDelete />
-            </button>
-            <button className="bg-blue-600 text-white rounded flex-colo w-6 h-6">
-              <FiDownload />
-            </button>
             <Link
               to={`/movie/${movie?._id}`}
-              className="bg-green-600 text-white rounded flex-colo w-6 h-6"
+              className="bg-blue-600 text-white rounded flex-colo w-6 h-6"
             >
               <GoEye />
             </Link>
+            <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
+              <MdDelete />
+            </button>
           </>
         )}
       </td>

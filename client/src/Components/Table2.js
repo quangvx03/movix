@@ -1,5 +1,5 @@
 import React from "react";
-import { FaEdit } from "react-icons/fa";
+import { BiSolidEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { DateFormat, shortUppercaseId } from "./Notification/Empty";
 
@@ -56,7 +56,7 @@ const Rows = ({ data, users, onEditFunction, onDeleteFunction }) => {
               onClick={() => onEditFunction(data)}
               className="bg-green-600 text-white rounded flex-colo w-6 h-6"
             >
-              <FaEdit />
+              <BiSolidEdit />
             </button>
             <button
               onClick={() => onDeleteFunction(data?._id)}
