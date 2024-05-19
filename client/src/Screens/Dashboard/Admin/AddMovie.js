@@ -3,7 +3,7 @@ import SideBar from "./../SideBar";
 import { Input, Message, Select } from "./../../../Components/UsedInputs";
 import Uploder from "./../../../Components/Uploder";
 import { MdDelete } from "react-icons/md";
-import { BiSolidEdit } from "react-icons/bi";
+// import { BiSolidEdit } from "react-icons/bi";
 import { ImUpload } from "react-icons/im";
 import CastsModal from "../../../Components/Modals/CastsModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -235,7 +235,7 @@ function AddMovie() {
                   />
                   <p>{user.name}</p>
                   <div className="flex-rows mt-2 w-full gap-2">
-                    <button
+                    {/* <button
                       onClick={() => {
                         setCast(user);
                         setModalOpen(true);
@@ -243,7 +243,7 @@ function AddMovie() {
                       className="w-6 h-6 flex-colo text-white bg-green-600 rounded"
                     >
                       <BiSolidEdit />
-                    </button>
+                    </button> */}
                     <button
                       onClick={() => deleteCastHandler(user?.id)}
                       className="w-6 h-6 flex-colo text-white bg-subMain rounded"

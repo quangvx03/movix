@@ -24,7 +24,10 @@ const RegisterValidation = yup.object().shape({
     .string()
     .required("Tên là trường bắt buộc")
     .max(20, "Tên không được quá 20 ký tự")
-    .matches(/^[a-zA-Z ]*$/, "Tên không được chứa ký tự đặc biệt"),
+    .matches(
+      /^[^\d!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]*$/,
+      "Tên không được chứa ký tự đặc biệt"
+    ),
 });
 
 const ProfileValidation = yup.object().shape({
@@ -32,7 +35,10 @@ const ProfileValidation = yup.object().shape({
     .string()
     .required("Tên là trường bắt buộc")
     .max(20, "Tên không được quá 20 ký tự")
-    .matches(/^[a-zA-Z ]*$/, "Tên không được chứa ký tự đặc biệt"),
+    .matches(
+      /^[^\d!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]*$/,
+      "Tên không được chứa ký tự đặc biệt"
+    ),
   email: yup.string().email().required("Email là trường bắt buộc").trim(),
 });
 

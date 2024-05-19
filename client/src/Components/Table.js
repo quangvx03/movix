@@ -16,7 +16,7 @@ const Rows = (movie, i, admin, onDeleteHandler) => {
         <div className="w-12 p-1 bg-dry border border-border h-12 rounded overflow-hidden">
           <img
             className="h-full w-full object-cover"
-            src={movie?.image ? movie?.image : "/images/user.png"}
+            src={movie?.image ? movie?.image : "/images/default.png"}
             alt={movie?.name}
           />
         </div>
@@ -56,9 +56,9 @@ const Rows = (movie, i, admin, onDeleteHandler) => {
             >
               <GoEye />
             </Link>
-            <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
+            {/* <button className="bg-subMain text-white rounded flex-colo w-6 h-6">
               <MdDelete />
-            </button>
+            </button> */}
           </>
         )}
       </td>

@@ -33,7 +33,6 @@ const moviesSchema = mongoose.Schema(
     },
     director: {
       type: String,
-      required: true,
     },
     titleImage: {
       type: String,

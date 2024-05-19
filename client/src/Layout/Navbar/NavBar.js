@@ -94,7 +94,7 @@ function NavBar() {
                 )}
               </NavLink>
               {userInfo && (
-                <div className="absolute bottom-0 transform translate-y-full left-1/3 -translate-x-1/2 bg-subMain text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transitions">
+                <div className="absolute bottom-0 transform translate-y-full left-1/3 -translate-x-1/2 bg-subMain text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transitions whitespace-nowrap">
                   {userInfo?.name}
                 </div>
               )}

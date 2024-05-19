@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ProfileValidation } from "../../Components/Validation/userValidation";
 import { InlineError } from "../../Components/Notification/Error";
-import { ImagePreview } from "../../Components/ImagePreview";
+import { ImageUserPreview } from "../../Components/ImagePreview";
 import {
   deleteProfileAction,
   updateProfileAction,
@@ -74,7 +74,7 @@ function Profile() {
           </div>
           {/* image preview */}
           <div className="col-span-2">
-            <ImagePreview
+            <ImageUserPreview
               image={imageUrl}
               name={userInfo ? userInfo.name : "Người dùng Movix"}
             />

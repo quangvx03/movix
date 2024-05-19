@@ -17,5 +17,5 @@ export const shortUppercaseId = (id) => {
 };
 
 export const DateFormat = (date) => {
-  return moment(date).format("LL");
+  return moment(date).format("DD/MM/YYYY");
 };
