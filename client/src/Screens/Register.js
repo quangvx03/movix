@@ -123,5 +123,3 @@ function Register() {
 }
 
 export default Register;
-
-// 4:14:40
