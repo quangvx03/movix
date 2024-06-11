@@ -126,7 +126,7 @@ function MovieRates({ movie }) {
               to="/login"
               className="bg-main hover:bg-subMain border-2 border-subMain transitions text-white py-3 w-full flex-colo rounded"
             >
-              Đang nhập để đánh giá
+              Đăng nhập để đánh giá
             </Link>
           )}
         </form>
