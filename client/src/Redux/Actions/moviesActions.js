@@ -1,7 +1,7 @@
 import * as moviesConstants from "../Constants/moviesConstants";
 import * as moviesAPIs from "../APIs/MoviesServices";
 import toast from "react-hot-toast";
-import { ErrorsAction, tokenProtection } from "./../Protection";
+import { ErrorsAction, tokenProtection } from "../Protection";
 
 // get all movies action
 export const getAllMoviesAction =
